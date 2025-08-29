@@ -1,26 +1,350 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-sans: var(--ff-sans-normal);   /* Barlow */
+  --font-serif: var(--ff-serif);        /* Bellefair */
+  --font-cond: var(--ff-sans-cond);     /* Barlow Condensed */
+
+  /* Space color mappings - Fixed */
+  --color-space-primary: var(--space-primary);
+  --color-space-primary-foreground: var(--space-primary-foreground);
+  --color-space-secondary: var(--space-secondary);
+  --color-space-secondary-foreground: var(--space-secondary-foreground);
+  --color-space-accent: var(--space-accent);
+  --color-space-accent-foreground: var(--space-accent-foreground);
+  --color-space-muted: var(--space-muted);
+  --color-space-muted-foreground: var(--space-muted-foreground);
+  --color-space-border: var(--space-border);
+  --color-space-link: var(--space-link);
+  --color-space-primary-background: var(--space-primary-background);
+  --color-space-secondary-background: var(--space-secondary-background);
+  --color-space-accent-background: var(--space-accent-background);
+
+  /* Standard color mappings */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
+:root {
+  --navbar-height: 100px; /* default */
+
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+
+  /* Space theme colors */
+  --space-primary: oklch(1 0 0);  
+  --space-primary-foreground: oklch(0.07 0.01 263.5); 
+  --space-secondary: oklch(0.07 0.01 263.5);  
+  --space-secondary-foreground: oklch(1 0 0);
+  --space-muted: oklch(0.92 0.02 250); /* slightly darker grayish tone */
+  --space-muted-foreground: oklch(0.78 0.02 250); /* lighter grayish tone */ 
+  --space-accent: oklch(0.07 0.01 263.5); 
+  --space-accent-foreground:oklch(0.89 0.08 265.6);   
+  --space-border: oklch(1 0 0);     
+  --space-link: oklch(0.89 0.08 265.6);    
+  --space-primary-background: oklch(1 0 0);     
+  --space-secondary-background: oklch(0.07 0.01 263.5);      
+  --space-accent-background: oklch(0.89 0.08 265.6);    
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0); 
+}
+
+@media (min-width: 768px) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --navbar-height: 150px; /* md breakpoint */
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
 }
+
+/* globals.css (or any imported Tailwind CSS file) */
+@layer utilities {
+  .grid-cols-custom {
+    @apply md:grid-cols-[minmax(0rem,5vw)_repeat(2,minmax(0,1fr))_minmax(0rem,5vw)]
+  }
+}
+
+.navbar-blur {
+  background-color: rgb(255 255 255 / 0.05);
+}
+
+@supports (backdrop-filter: blur(1.5rem)) {
+  .navbar-blur {
+    background-color: rgb(255 255 255 / 0.05);
+    backdrop-filter: blur(1.5rem);
+  }
+}
+
+.home-background-image {
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-image: url(/assets/home/background-home-mobile.jpg);
+}
+
+@media (min-width: 35em) {
+  .home-background-image {
+    background-position: center center;
+    background-image: url(/assets/home/background-home-tablet.jpg);
+  }
+}
+
+@media (min-width: 45em) {
+  .home-background-image {
+    background-image: url(/assets/home/background-home-desktop.jpg);
+  }
+}
+
+.destination-background-image {
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-image: url(/assets/destination/background-destination-mobile.jpg);
+}
+
+@media (min-width: 35em) {
+  .destination-background-image {
+    background-position: center center;
+    background-image: url(/assets/destination/background-destination-tablet.jpg);
+  }
+}
+
+@media (min-width: 45em) {
+  .destination-background-image {
+    background-image: url(/assets/destination/background-destination-desktop.jpg);
+  }
+}
+
+.crew-background-image {
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-image: url(/assets/crew/background-crew-mobile.jpg);
+}
+
+@media (min-width: 35em) {
+  .crew-background-image {
+    background-position: center center;
+    background-image: url(/assets/crew/background-crew-tablet.jpg);
+  }
+}
+
+@media (min-width: 45em) {
+  .crew-background-image {
+    background-image: url(/assets/crew/background-crew-desktop.jpg);
+  }
+}
+
+.technology-background-image {
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-image: url(/assets/technology/background-technology-mobile.jpg);
+}
+
+@media (min-width: 35em) {
+  .technology-background-image {
+    background-position: center center;
+    background-image: url(/assets/technology/background-technology-tablet.jpg);
+  }
+}
+
+@media (min-width: 45em) {
+  .technology-background-image {
+    background-image: url(/assets/technology/background-technology-desktop.jpg);
+  }
+}
+
+.grid-container--crew > .title {
+  grid-area: title;
+}
+
+.grid-container--crew > .content {
+  grid-area: content;
+}
+
+.grid-container--crew > .tabs {
+  grid-area: tabs;
+}
+
+.grid-container--crew > .image {
+  grid-area: image;
+}
+
+
+.grid-container {
+    text-align: center;
+    display: grid;
+    place-items: center;
+}
+
+@media (min-width: 45em) {
+  .grid-container {
+      text-align: left;
+      grid-template-columns: minmax(1rem, 5vw) repeat(2, minmax(0, 1fr)) minmax(1rem, 5vw);
+  }
+}
+
+.grid-container--crew {
+  grid-template-areas:
+    'title'
+    'image'
+    'tabs'
+    'content';
+}
+
+@media (min-width: 35em) {
+  .grid-container--crew {
+    grid-template-areas:
+      'title'
+      'content'
+      'tabs'
+      'image';
+  }
+}
+
+@media (min-width: 45em) {
+  .grid-container--crew {
+    grid-template-columns: minmax(1rem, 5vw) repeat(2, minmax(0, 1fr)) minmax(1rem, 5vw);
+    justify-items: start;
+    grid-template-areas:
+      '. title title .'
+      '. content image . '
+      '. tabs image .';
+  }
+}
+
+
+/* @media (min-width: 48em) {
+  .grid-container {
+      display: grid;
+      column-gap: 2rem;
+      grid-template-columns: minmax(2rem, 1fr) repeat(2, minmax(0, 30rem)) minmax(2rem, 1fr);
+  }
+}
+
+@media (min-width: 48em) {
+  .grid-container--home > *:first-child {
+      grid-column: 2;
+  }
+
+  .grid-container--home > *:last-child {
+      grid-column: 3;
+  }
+
+  .grid-container--home
+  {
+    padding-bottom: max(6rem,20vh);
+    place-items: end;
+  }
+}
+ */
