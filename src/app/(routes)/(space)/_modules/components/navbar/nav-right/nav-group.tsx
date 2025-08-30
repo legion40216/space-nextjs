@@ -44,6 +44,7 @@ export function useNavRoutes() {
 
 export default function NavGroup() {
   const routes = useNavRoutes();
+  const pathName = usePathname();
 
   return (
     <nav className="hidden md:flex items-center md:gap-8 
@@ -75,7 +76,6 @@ export default function NavGroup() {
               className="min-w-[200px] bg-white shadow-lg"
             >
               {route.subLinks.map((sub, i) => {
-                const pathName = usePathname();
                 const isSubActive = pathName === sub.href || 
                   (sub.href !== "/" && pathName?.startsWith(sub.href + "/"));
                 
